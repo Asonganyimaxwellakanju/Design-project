@@ -3,9 +3,9 @@
 // Handle form submission
 const questionnaireForm = document.getElementById('questionnaireForm');
 if (questionnaireForm) {
-    questionnaireForm.addEventListener('submit', function(e) {
+    questionnaireForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        
+
         // Collect questionnaire data
         const questionnaireData = {
             symptomsDuration: document.getElementById('symptoms').value,
@@ -16,10 +16,10 @@ if (questionnaireForm) {
             previousTreatments: document.getElementById('treatments').value,
             timestamp: new Date().toISOString()
         };
-        
+
         // Store questionnaire data
         localStorage.setItem('questionnaireData', JSON.stringify(questionnaireData));
-        
+
         // Show loading state
         const submitBtn = questionnaireForm.querySelector('button[type="submit"]');
         const originalText = submitBtn.innerHTML;
@@ -30,7 +30,7 @@ if (questionnaireForm) {
             Analyzing...
         `;
         submitBtn.disabled = true;
-        
+
         // Add spin animation
         const style = document.createElement('style');
         style.textContent = `
@@ -40,12 +40,43 @@ if (questionnaireForm) {
             }
         `;
         document.head.appendChild(style);
-        
-        // Simulate analysis (in real app, this would be an API call)
-        setTimeout(function() {
-            // Redirect to results page
-            window.location.href = 'results.html';
-        }, 2000);
+
+        // Send to API for prediction
+        const image1 = localStorage.getItem('analysisImage1');
+
+        async function getPrediction() {
+            try {
+                // Convert data URL to Blob
+                const fetchRes = await fetch(image1);
+                const blob = await fetchRes.blob();
+
+                const formData = new FormData();
+                formData.append('image', blob, 'image.jpg');
+
+                const response = await fetch('http://localhost:3000/api/predict', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    localStorage.setItem('diagnosisResult', JSON.stringify(data));
+                    window.location.href = 'results.html';
+                } else {
+                    alert('Analysis failed');
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred during analysis');
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        }
+
+        getPrediction();
     });
 }
 
@@ -53,16 +84,16 @@ if (questionnaireForm) {
 const logoutBtns = document.querySelectorAll('.nav-link');
 logoutBtns.forEach(btn => {
     if (btn.textContent.includes('Log out')) {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function () {
             if (confirm('Are you sure you want to log out?')) {
                 localStorage.removeItem('isLoggedIn');
                 window.location.href = 'login.html';
             }
         });
     }
-    
+
     if (btn.textContent.includes('Profile')) {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function () {
             window.location.href = 'profile.html';
         });
     }

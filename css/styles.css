@@ -630,13 +630,14 @@ body {
 
 .video-duration {
     position: absolute;
-    bottom: 0.75rem;
-    right: 0.75rem;
+    bottom: 5px;
+    right: 5px;
     background: rgba(0, 0, 0, 0.7);
     color: var(--white);
-    padding: 0.25rem 0.5rem;
+    padding: 2px 6px;
     border-radius: 4px;
-    font-size: 0.875rem;
+    font-size: 0.75rem;
+    pointer-events: none;
 }
 
 .video-card h4 {

@@ -1,22 +1,48 @@
 // Diagnosis results functionality
 
 // Load results on page load
-window.addEventListener('load', function() {
-    // In a real application, this would fetch results from backend
-    // For now, we'll display static results
-    
-    // Animate confidence badge
-    animateConfidence();
+window.addEventListener('load', function () {
+    const diagnosisData = JSON.parse(localStorage.getItem('diagnosisResult'));
+
+    if (diagnosisData) {
+        // Update Title
+        document.querySelector('.diagnosis-header h2').textContent = diagnosisData.condition;
+
+        // Update Confidence
+        const confidence = Math.round(diagnosisData.confidence * 100);
+        animateConfidence(confidence);
+
+        // Update Description
+        document.querySelector('.diagnosis-description').textContent = diagnosisData.description;
+
+        // Update Treatment Plan
+        const treatmentContainer = document.querySelector('.treatment-plan');
+        treatmentContainer.innerHTML = '<h3>Recommended Treatment Plan</h3>';
+
+        diagnosisData.prevention.forEach(step => {
+            const stepDiv = document.createElement('div');
+            stepDiv.className = 'treatment-step';
+            stepDiv.innerHTML = `
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF">
+                    <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                <p>${step}</p>
+            `;
+            treatmentContainer.appendChild(stepDiv);
+        });
+    } else {
+        animateConfidence(95); // Fallback
+    }
 });
 
-function animateConfidence() {
+function animateConfidence(targetValue = 95) {
     const badge = document.querySelector('.confidence-badge');
     let count = 0;
-    const target = 95;
+    const target = targetValue;
     const duration = 1500;
     const increment = target / (duration / 16);
-    
-    const counter = setInterval(function() {
+
+    const counter = setInterval(function () {
         count += increment;
         if (count >= target) {
             count = target;
@@ -29,7 +55,7 @@ function animateConfidence() {
 // Video card click handlers
 const videoCards = document.querySelectorAll('.video-card');
 videoCards.forEach(card => {
-    card.addEventListener('click', function() {
+    card.addEventListener('click', function () {
         const title = this.querySelector('h4').textContent;
         alert(`Video: ${title}\n\nThis would open the video player in a real application.`);
     });
@@ -39,16 +65,16 @@ videoCards.forEach(card => {
 const logoutBtns = document.querySelectorAll('.nav-link');
 logoutBtns.forEach(btn => {
     if (btn.textContent.includes('Log out')) {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function () {
             if (confirm('Are you sure you want to log out?')) {
                 localStorage.removeItem('isLoggedIn');
                 window.location.href = 'login.html';
             }
         });
     }
-    
+
     if (btn.textContent.includes('Profile')) {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function () {
             window.location.href = 'profile.html';
         });
     }
@@ -58,13 +84,13 @@ logoutBtns.forEach(btn => {
 const resetButtons = document.querySelectorAll('button');
 resetButtons.forEach(button => {
     if (button.textContent === 'Reset') {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             if (confirm('Are you sure you want to start a new analysis? This will clear current results.')) {
                 // Clear stored data
                 localStorage.removeItem('analysisImage1');
                 localStorage.removeItem('analysisImage2');
                 localStorage.removeItem('questionnaireData');
-                
+
                 // Redirect to upload page
                 window.location.href = 'upload.html';
             }
@@ -78,7 +104,7 @@ const shareButton = Array.from(document.querySelectorAll('button')).find(
 );
 
 if (shareButton) {
-    shareButton.addEventListener('click', function() {
+    shareButton.addEventListener('click', function () {
         // In real app, this would generate a PDF or send email
         alert('Diagnosis report prepared!\n\nIn a full application, this would:\n- Generate a PDF report\n- Send to your doctor\'s email\n- Create a shareable link');
     });
