@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doc_skin - Diagnosis Results</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#2DD4BF" />
+                <path d="M2 17L12 22L22 17" stroke="#2DD4BF" stroke-width="2" />
+                <path d="M2 12L12 17L22 12" stroke="#2DD4BF" stroke-width="2" />
+            </svg>
+            <span>Doc_skin</span>
+        </div>
+        <div class="nav-right">
+            <button class="nav-link">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                </svg>
+                Profile
+            </button>
+            <button class="nav-link">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                    <polyline points="16 17 21 12 16 7" />
+                    <line x1="21" y1="12" x2="9" y2="12" />
+                </svg>
+                Log out
+            </button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="results-banner">
+            <div class="confidence-badge">95%</div>
+            <h1>Diagnosis Complete</h1>
+            <p>Based on your image and questionnaire</p>
+        </div>
+
+        <div class="results-grid">
+            <div class="diagnosis-card">
+                <div class="diagnosis-header">
+                    <h2>Atopic Dermatitis (Eczema)</h2>
+                    <button class="btn-outline">High Confidence</button>
+                </div>
+
+                <p class="diagnosis-description">
+                    Commonly known as eczema, this is a condition that makes your skin red and itchy. It's common in
+                    children but can occur at any age. It is long lasting (chronic) and tends to flare periodically.
+                </p>
+
+                <div class="treatment-plan">
+                    <h3>Recommended Treatment Plan</h3>
+
+                    <div class="treatment-step">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                        <p>Use fragrance-free moisturizers immediately after bathing.</p>
+                    </div>
+
+                    <div class="treatment-step">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                        <p>Avoid known triggers (stress, harsh soaps).</p>
+                    </div>
+
+                    <div class="treatment-step">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                        <p>Keep fingernails short to prevent scratching damage.</p>
+                    </div>
+                </div>
+
+                <div class="next-steps">
+                    <h3>Next Steps</h3>
+                    <button class="btn-primary btn-full" onclick="window.location.href='dashboard.html'">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                        </svg>
+                        Validate & Continue
+                    </button>
+                    <button class="btn-secondary btn-full">Reset</button>
+                    <button class="btn-secondary btn-full">Share with Doctor</button>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <p class="disclaimer">
+                    *This AI diagnosis is for informational purposes only and does not replace professional medical
+                    advice. Please consult with a healthcare provider for treatment.
+                </p>
+            </div>
+        </div>
+
+        <div class="video-section">
+            <h2>Recommended Treatment Plan</h2>
+            <div class="video-grid">
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="#fff">
+                            <polygon points="5 3 19 12 5 21 5 3" />
+                        </svg>
+                        <span class="video-duration">5:23</span>
+                    </div>
+                    <h4>How to Manage Eczema Symptoms</h4>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail video-thumbnail-alt">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="#fff">
+                            <polygon points="5 3 19 12 5 21 5 3" />
+                        </svg>
+                        <span class="video-duration">4:15</span>
+                    </div>
+                    <h4>Identify Your Skin Trigger</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/results.js"></script>
+</body>
+
+</html>

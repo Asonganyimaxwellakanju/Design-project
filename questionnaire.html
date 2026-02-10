@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doc_skin - Patient Questionnaire</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#2DD4BF" />
+                <path d="M2 17L12 22L22 17" stroke="#2DD4BF" stroke-width="2" />
+                <path d="M2 12L12 17L22 12" stroke="#2DD4BF" stroke-width="2" />
+            </svg>
+            <span>Doc_skin</span>
+        </div>
+        <div class="nav-right">
+            <button class="nav-link">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                </svg>
+                Profile
+            </button>
+            <button class="nav-link">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                    <polyline points="16 17 21 12 16 7" />
+                    <line x1="21" y1="12" x2="9" y2="12" />
+                </svg>
+                Log out
+            </button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="questionnaire-header">
+            <h1>Patient Questionnaire</h1>
+            <p>Please answer a few questions to help us provide an accurate diagnosis.</p>
+        </div>
+
+        <div class="questionnaire-card">
+            <form id="questionnaireForm">
+                <div class="form-group">
+                    <label for="symptoms">How long have you been experiencing symptoms?</label>
+                    <input type="text" id="symptoms" placeholder="e.g. 2 weeks, 3 days" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Are you currently experiencing a flare-up?</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="flareup" value="yes" checked>
+                            <span>Yes</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="flareup" value="no">
+                            <span>No</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="areas">If yes, describe affected areas:</label>
+                    <textarea id="areas" rows="4" placeholder="e.g.Elbows,knees,neck"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="triggers">Specific triggers noted?</label>
+                    <input type="text" id="triggers" placeholder="e.g.Stress, certain foods, detergent">
+                </div>
+
+                <div class="form-group">
+                    <label>Family history of eczema or skin conditions?</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="family" value="yes">
+                            <span>Yes</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="family" value="no" checked>
+                            <span>No</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="treatments">Previous treatments tried?</label>
+                    <textarea id="treatments" rows="4"
+                        placeholder="List any creams or medication you've used..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-primary btn-full">Submit & Analyze</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/questionnaire.js"></script>
+</body>
+
+</html>
